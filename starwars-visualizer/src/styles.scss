@@ -246,6 +246,53 @@ main {
   }
 }
 
+.loading {
+  text-align: center;
+  padding: 20px;
+
+  .spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 10px;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+}
+
+.error {
+  text-align: center;
+  padding: 20px;
+  background-color: #ffe6e6;
+  border: 1px solid #ff4d4d;
+  border-radius: 4px;
+
+  .error-message {
+    color: #d32f2f;
+    margin-bottom: 10px;
+  }
+}
+
+.retry-button {
+  padding: 8px 16px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #0e5d91;
+  }
+}
+
 footer {
   padding: 20px 0;
   border-top: 1px solid $border-color;
