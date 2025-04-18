@@ -1,0 +1,44 @@
+<div class="container">
+
+    @if (dataView$ | async; as data) {
+
+    <div class="page-title">
+        <h1>{{ data.title }}</h1>
+    </div>
+
+    @if (data.isLoading) {
+    <div class="loading">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+    </div>
+    }
+
+    @if (data.error && !data.isLoading) {
+    <div class="error">
+        <p class="error-message">{{ data.error }}</p>
+        <button class="retry-button" (click)="retry()">Retry</button>
+    </div>
+    }
+
+    @if (!data.isLoading && !data.error && !data.items.length) {
+    <p>No films found.</p>
+    }
+
+    <div class="items-grid">
+
+        @for (item of data.items; track item.url; let i = $index) {
+        <div class="item-card">
+            <img [src]="'images/character' + ((i % 2) + 1) + '.jpg'" alt="Character" class="item-thumbnail">
+            <div class="item-info">
+                <h3>{{ item.name }}</h3>
+                <p>Größe: {{ item.height }}</p>
+                <p>Augenfarbe: {{ item.eye_color }}</p>
+                <p>Geburtsjahr: {{ item.birth_year }}</p>
+                <a href="#" class="more-info">Mehr Informationen...</a>
+            </div>
+        </div>
+        }
+
+    </div>
+    }
+</div>

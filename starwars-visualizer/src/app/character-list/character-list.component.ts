@@ -2,24 +2,24 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, catchError, delay, map, Observable, startWith, switchMap } from 'rxjs';
 import { ItemService } from '../services/item.service';
-import { Film } from '../types/film';
+import { Character } from '../types/character';
 
 
 interface DataView {
   title: string;
-  items: Film[];
+  items: Character[];
   isLoading: boolean;
   error: string | null;
 }
 
 @Component({
-  selector: 'app-film-list',
+  selector: 'app-character-list',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './film-list.component.html',
-  styleUrl: './film-list.component.scss'
+  templateUrl: './character-list.component.html',
+  styleUrl: './character-list.component.scss'
 })
-export class FilmListComponent implements OnInit {
+export class CharacterListComponent implements OnInit {
 
   dataView$!: Observable<DataView>;
   private refreshSubject = new BehaviorSubject<void>(undefined);
@@ -28,8 +28,8 @@ export class FilmListComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataView$ = this.refreshSubject.asObservable().pipe(
-      switchMap(() => this.fetchFilms()),
-      startWith({ title: 'Filme', items: [] as Film[], isLoading: true, error: null })
+      switchMap(() => this.fetchCharacters()),
+      startWith({ title: 'Charaktere', items: [] as Character[], isLoading: true, error: null })
     );
   }
 
@@ -37,11 +37,11 @@ export class FilmListComponent implements OnInit {
     this.refreshSubject.next();
   }
 
-  private fetchFilms(): Observable<DataView> {
-    return this.itemService.getFilms().pipe(
-      map(films => ({
-        title: 'Filme',
-        items: films,
+  private fetchCharacters(): Observable<DataView> {
+    return this.itemService.getCharacters().pipe(
+      map(characters => ({
+        title: 'Charaktere',
+        items: characters,
         isLoading: false,
         error: null
       })),
@@ -53,8 +53,8 @@ export class FilmListComponent implements OnInit {
   private createErrorViewModel(errorMessage: string): Observable<DataView> {
     return new Observable(subscriber => {
       subscriber.next({
-        title: 'Filme',
-        items: [] as Film[],
+        title: 'Charaktere',
+        items: [] as Character[],
         isLoading: false,
         error: errorMessage
       });
