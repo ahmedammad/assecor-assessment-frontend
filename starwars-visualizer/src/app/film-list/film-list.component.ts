@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, catchError, delay, map, Observable, startWith, switchMap } from 'rxjs';
 import { ItemService } from '../services/item.service';
 import { Film } from '../types/film';
+import { FeedbackComponent } from '../feedback/feedback.component';
 
 
 interface DataView {
@@ -15,7 +16,7 @@ interface DataView {
 @Component({
   selector: 'app-film-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FeedbackComponent],
   templateUrl: './film-list.component.html',
   styleUrl: './film-list.component.scss'
 })

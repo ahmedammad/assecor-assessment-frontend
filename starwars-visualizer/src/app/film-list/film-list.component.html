@@ -6,23 +6,7 @@
         <h1>{{ data.title }}</h1>
     </div>
 
-    @if (data.isLoading) {
-    <div class="loading">
-        <div class="spinner"></div>
-        <p>Loading...</p>
-    </div>
-    }
-
-    @if (data.error && !data.isLoading) {
-    <div class="error">
-        <p class="error-message">{{ data.error }}</p>
-        <button class="retry-button" (click)="retry()">Retry</button>
-    </div>
-    }
-
-    @if (!data.isLoading && !data.error && !data.items.length) {
-    <p>No films found.</p>
-    }
+    <app-feedback [data]="data" (retry)="retry()"></app-feedback>
 
     <div class="items-grid">
 

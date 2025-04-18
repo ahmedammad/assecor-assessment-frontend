@@ -1,0 +1,17 @@
+@if (data()?.isLoading) {
+<div class="loading">
+    <div class="spinner"></div>
+    <p>Loading...</p>
+</div>
+}
+
+@if (data()?.error && !data()?.isLoading) {
+<div class="error">
+    <p class="error-message">{{ data()?.error }}</p>
+    <button class="retry-button" (click)="triggerRetry()">Retry</button>
+</div>
+}
+
+@if (!data()?.isLoading && !data()?.error && !data()?.items?.length) {
+<p>No films found.</p>
+}

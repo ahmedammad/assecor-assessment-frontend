@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, catchError, delay, map, Observable, startWith, switchMap } from 'rxjs';
 import { ItemService } from '../services/item.service';
 import { Character } from '../types/character';
+import { FeedbackComponent } from "../feedback/feedback.component";
 
 
 interface DataView {
@@ -15,7 +16,7 @@ interface DataView {
 @Component({
   selector: 'app-character-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FeedbackComponent],
   templateUrl: './character-list.component.html',
   styleUrl: './character-list.component.scss'
 })
