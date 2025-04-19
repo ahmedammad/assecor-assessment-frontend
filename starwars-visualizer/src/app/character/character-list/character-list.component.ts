@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, catchError, delay, map, Observable, startWith, switchMap } from 'rxjs';
-import { ItemService } from '../services/rest/item.service';
-import { Character } from '../types/character';
-import { FeedbackComponent } from "../feedback/feedback.component";
+import { ItemService } from '../../services/rest/item.service';
+import { Character } from '../../types/character';
+import { FeedbackComponent } from "../../feedback/feedback.component";
+import { StateService } from '../../services/state.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 interface DataView {
@@ -25,7 +27,7 @@ export class CharacterListComponent implements OnInit {
   dataView$!: Observable<DataView>;
   private refreshSubject = new BehaviorSubject<void>(undefined);
 
-  constructor(private itemService: ItemService) { }
+  constructor(private itemService: ItemService, private stateService: StateService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.dataView$ = this.refreshSubject.asObservable().pipe(
@@ -60,6 +62,11 @@ export class CharacterListComponent implements OnInit {
         error: errorMessage
       });
     });
+  }
+
+  goToCharacter(character: Character): void {
+    this.stateService.selectedCharacter.set(character);
+    this.router.navigate(['detail'], { relativeTo: this.route });
   }
 
 }

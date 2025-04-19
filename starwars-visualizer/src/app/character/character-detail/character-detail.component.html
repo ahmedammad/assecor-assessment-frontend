@@ -1,23 +1,22 @@
 <div class="container">
     <div class="page-title">
-        <p>Filmdetails</p>
-        <h1>{{film()?.title}}</h1>
-        <h2>Episode {{film()?.episode_id}}</h2>
+        <p>Characterdetails</p>
+        <h1>{{character()?.name}}</h1>
     </div>
 
-    <div class="film-details">
-        <div class="film-info">
+    <div class="item-details">
+        <div class="item-info">
             <h2>Details:</h2>
-            <p><strong>Director:</strong> {{film()?.director}}</p>
-            <p><strong>Produzenten:</strong> {{film()?.producer}}</p>
-            <p><strong>Erscheinungsdatum:</strong> {{film()?.release_date | date : 'dd.MM.yyyy' }}</p>
-
-            <div class="film-description">
-                <p>{{film()?.opening_crawl}}</p>
-            </div>
+            <p><strong>Größe:</strong> {{character()?.height}}</p>
+            <p><strong>Gewicht:</strong> {{character()?.mass}}</p>
+            <p><strong>Haarfarbe:</strong> {{character()?.hair_color }}</p>
+            <p><strong>Augenfarbe:</strong> {{character()?.eye_color}}</p>
+            <p><strong>Geburtsjahr:</strong> {{character()?.birth_year}}</p>
+            <p><strong>Geschlecht:</strong> {{character()?.gender}}</p>
+            <p><strong>Heimatplanet:</strong> <a href="#" class="tag">{{character()?.homeworld}}</a></p>
 
             <div class="related-items">
-                <h3>Charaktere:</h3>
+                <h3>Filme:</h3>
                 <div class="tag-list">
                     <a href="#" class="tag">Luke Skywalker</a>
                     <a href="#" class="tag">C3-PO</a>
@@ -56,13 +55,7 @@
             </div>
         </div>
 
-        <div class="film-image">
-            <img src="images/film1.jpg" alt="Film Image">
-            <div class="pagination">
-                <span class="dot active"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-            </div>
-        </div>
+        <app-image-slider [images]="['images/character1.jpg', 'images/character2.jpg']"></app-image-slider>
+
     </div>
 </div>

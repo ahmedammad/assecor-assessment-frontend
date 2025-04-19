@@ -1,0 +1,12 @@
+@if (images()?.length) {
+<div class="image-slider">
+    <img [src]="currentImage()" alt="Image" />
+
+    <div class="pagination">
+        @for (img of images(); track $index; let i = $index) {
+        <span class="dot" [class.active]="i === currentIndex()"
+            (click)="selectImage(i)"></span>
+        }
+    </div>
+</div>
+}

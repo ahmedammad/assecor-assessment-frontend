@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, catchError, delay, map, Observable, startWith, switchMap } from 'rxjs';
-import { ItemService } from '../services/rest/item.service';
-import { Film } from '../types/film';
-import { FeedbackComponent } from '../feedback/feedback.component';
+import { ItemService } from '../../services/rest/item.service';
+import { Film } from '../../types/film';
+import { FeedbackComponent } from '../../feedback/feedback.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { StateService } from '../services/state.service';
+import { StateService } from '../../services/state.service';
 
 
 interface DataView {

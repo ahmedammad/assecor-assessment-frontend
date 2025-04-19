@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { Film } from '../types/film';
 import { CommonModule } from '@angular/common';
-import { StateService } from '../services/state.service';
+import { StateService } from '../../services/state.service';
+import { ImageSliderComponent } from '../../image-slider/image-slider.component';
 
 @Component({
   selector: 'app-film-detail',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ImageSliderComponent],
   templateUrl: './film-detail.component.html',
   styleUrl: './film-detail.component.scss'
 })

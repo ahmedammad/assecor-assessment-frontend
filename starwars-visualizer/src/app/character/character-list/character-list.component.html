@@ -18,7 +18,7 @@
                 <p>Größe: {{ item.height }}</p>
                 <p>Augenfarbe: {{ item.eye_color }}</p>
                 <p>Geburtsjahr: {{ item.birth_year }}</p>
-                <a href="#" class="more-info">Mehr Informationen...</a>
+                <span class="more-info" (click)="goToCharacter(item)">Mehr Informationen...</span>
             </div>
         </div>
         }

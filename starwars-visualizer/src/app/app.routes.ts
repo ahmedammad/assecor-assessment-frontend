@@ -1,9 +1,10 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { FilmListComponent } from './film-list/film-list.component';
-import { CharacterListComponent } from './character-list/character-list.component';
-import { PlanetListComponent } from './planet-list/planet-list.component';
-import { FilmDetailComponent } from './film-detail/film-detail.component';
+import { FilmListComponent } from './film/film-list/film-list.component';
+import { CharacterListComponent } from './character/character-list/character-list.component';
+import { PlanetListComponent } from './planet/planet-list/planet-list.component';
+import { FilmDetailComponent } from './film/film-detail/film-detail.component';
+import { CharacterDetailComponent } from './character/character-detail/character-detail.component';
 
 export const routes: Routes = [
    { path: '', component: HomeComponent },
@@ -14,6 +15,12 @@ export const routes: Routes = [
          { path: 'detail', component: FilmDetailComponent }
       ]
    },
-   { path: 'characters', component: CharacterListComponent },
+   {
+      path: 'characters',
+      children: [
+         { path: '', component: CharacterListComponent },
+         { path: 'detail', component: CharacterDetailComponent }
+      ]
+   },
    { path: 'planets', component: PlanetListComponent },
 ];
