@@ -1,0 +1,28 @@
+<div class="container">
+
+    @if (dataView$ | async; as data) {
+
+    <div class="page-title">
+        <h1>{{ data.title }}</h1>
+    </div>
+
+    <app-feedback [data]="data" (retry)="retry()"></app-feedback>
+
+    <div class="items-grid">
+
+        @for (item of data.items; track item.url; let i = $index) {
+        <div class="item-card">
+            <img [src]="'images/planet' + ((i % 2) + 1) + '.jpg'" alt="Planet" class="item-thumbnail">
+            <div class="item-info">
+                <h3>{{ item.name }}</h3>
+                <p>Durchmesser: {{ item.diameter }}</p>
+                <p>Klima: {{ item.climate }}</p>
+                <p>Bevölkerung: {{ item.population }}</p>
+                <a href="#" class="more-info">Mehr Informationen...</a>
+            </div>
+        </div>
+        }
+
+    </div>
+    }
+</div>
