@@ -1,9 +1,9 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Film } from '../types/film';
+import { Film } from '../../types/film';
 import { catchError, Observable, throwError } from 'rxjs';
-import { Character } from '../types/character';
-import { Planet } from '../types/planet';
+import { Character } from '../../types/character';
+import { Planet } from '../../types/planet';
 
 @Injectable({
   providedIn: 'root'

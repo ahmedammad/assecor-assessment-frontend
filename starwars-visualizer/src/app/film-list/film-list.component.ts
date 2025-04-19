@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, catchError, delay, map, Observable, startWith, switchMap } from 'rxjs';
-import { ItemService } from '../services/item.service';
+import { ItemService } from '../services/rest/item.service';
 import { Film } from '../types/film';
 import { FeedbackComponent } from '../feedback/feedback.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { StateService } from '../services/state.service';
 
 
 interface DataView {
@@ -25,7 +27,7 @@ export class FilmListComponent implements OnInit {
   dataView$!: Observable<DataView>;
   private refreshSubject = new BehaviorSubject<void>(undefined);
 
-  constructor(private itemService: ItemService) { }
+  constructor(private itemService: ItemService, private stateService: StateService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.dataView$ = this.refreshSubject.asObservable().pipe(
@@ -60,6 +62,16 @@ export class FilmListComponent implements OnInit {
         error: errorMessage
       });
     });
+  }
+
+  goToDetail(film: Film): void {
+    const tmpFilm: Film = {
+      ...film,
+      opening_crawl: film.opening_crawl.replace(/(\r\n)/g, ' ')
+    };
+
+    this.stateService.selectedFilm.set(tmpFilm);
+    this.router.navigate(['detail'], { relativeTo: this.route });
   }
 
 }

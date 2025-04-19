@@ -1,6 +1,7 @@
 $accent-color: #0074D9;
 $text-color: #333;
 $border-color: #ddd;
+$gray-color: #f5f5f5;
 
 $mobile: 576px;
 
@@ -242,6 +243,107 @@ main {
       font-size: 14px;
       color: $accent-color;
       padding-top: 10px;
+      cursor: pointer;
+    }
+  }
+}
+
+.film-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  
+  @media (max-width: $mobile) {
+    flex-direction: column-reverse;
+    gap: 30px;
+  }
+
+  .film-info {
+    flex: 1;
+    min-width: 300px;
+
+    @media (max-width: $mobile) {
+      min-width: 100%;
+    }
+
+    .film-description {
+      margin: 20px 0;
+      white-space: pre-line;
+    }
+  }
+
+  .film-image {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+    margin-bottom: 30px;
+
+    @media (max-width: $mobile) {
+      min-width: 100%;
+      margin-bottom: 20px;
+    }
+
+    img {
+      width: 100%;
+      max-width: 100%;
+      border-radius: 4px;
+    }
+  }
+}
+
+.related-items {
+  margin-top: 40px;
+
+  @media (max-width: $mobile) {
+    margin-top: 25px;
+  }
+
+  h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    
+    @media (max-width: $mobile) {
+      font-size: 18px;
+    }
+  }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    .tag {
+      background: $gray-color;
+      border-radius: 4px;
+      padding: 8px 15px;
+      font-size: 14px;
+
+      @media (max-width: $mobile) {
+        padding: 6px 12px;
+        font-size: 12px;
+      }
+
+      &:hover {
+        background: darken($gray-color, 5%);
+      }
+    }
+  }
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    background: #ccc;
+    border-radius: 50%;
+    margin: 0 5px;
+
+    &.active {
+      background: $accent-color;
     }
   }
 }

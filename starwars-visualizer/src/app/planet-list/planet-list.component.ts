@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, catchError, delay, map, Observable, startWith, switchMap } from 'rxjs';
-import { ItemService } from '../services/item.service';
+import { ItemService } from '../services/rest/item.service';
 import { FeedbackComponent } from '../feedback/feedback.component';
 import { Planet } from '../types/planet';
 

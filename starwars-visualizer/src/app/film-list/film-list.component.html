@@ -18,7 +18,7 @@
                 <p>Director: {{ item.director }}</p>
                 <p>Produzenten: {{ item.producer }}</p>
                 <p>Erscheinungsdatum: {{ item.release_date | date : 'dd.MM.yyyy' }}</p>
-                <a href="#" class="more-info">Mehr Informationen...</a>
+                <span class="more-info" (click)="goToDetail(item)">Mehr Informationen...</span>
             </div>
         </div>
         }
