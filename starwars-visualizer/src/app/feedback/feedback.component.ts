@@ -11,7 +11,7 @@ import { Planet } from '../types/planet';
   styleUrl: './feedback.component.scss'
 })
 export class FeedbackComponent {
-  data = input<{title: string, items: Film[] | Character[] | Planet[], isLoading: boolean, error: string | null;}>();
+  data = input<{items: (Film | Character | Planet)[], isLoading: boolean, error: string | null;}>();
 
   readonly retry = output<void>();
 

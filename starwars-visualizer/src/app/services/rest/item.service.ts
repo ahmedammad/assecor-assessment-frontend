@@ -20,6 +20,12 @@ export class ItemService {
     );
   }
 
+  getFilmByUrl(apiUrl: string): Observable<Film> {
+    return this.http.get<Film>(apiUrl).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   getCharacters(): Observable<Character[]> {
     return this.http.get<Character[]>(`${this.baseUrl}/people`).pipe(
       catchError(this.handleError)
@@ -34,6 +40,12 @@ export class ItemService {
 
   getPlanets(): Observable<Planet[]> {
     return this.http.get<Planet[]>(`${this.baseUrl}/planets`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getPlanetByUrl(apiUrl: string): Observable<Planet> {
+    return this.http.get<Planet>(apiUrl).pipe(
       catchError(this.handleError)
     );
   }

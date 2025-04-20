@@ -1,0 +1,43 @@
+<div class="related-items">
+    <h3>{{ title() }}:</h3>
+    @if (dataView$() | async; as data) {
+      <app-feedback [data]="data"></app-feedback>
+      @if (!data.isLoading && !data.error && data.items.length) {
+        <div class="tag-list">
+          @if (!data.showAll) {
+            @for (item of data.items | slice:0:3; track item) {
+                <button class="tag" (click)="onItemClick(item)">
+                  {{ isFilm(item) ? item.title : isCharacter(item) ? item.name : '' }}
+                </button>
+              }
+            <button class="tag" *ngIf="data.items.length > 3" (click)="toggleShowAll(data)">...</button>
+          } @else {
+            @for (item of data.items; track item) {
+                <button class="tag" (click)="onItemClick(item)">
+                  {{ isFilm(item) ? item.title : isCharacter(item) ? item.name : '' }}
+                </button>
+              }
+          }
+        </div>
+      }
+    }
+  </div>
+
+  <!-- <div class="related-items">
+    <h3>Charaktere:</h3>
+    @if (charactersView$ | async; as data) {
+
+        <app-feedback [data]="data"></app-feedback>
+
+        @if (!data.isLoading && !data.error && data.items.length) {
+            <div class="tag-list">
+                @if (!data.showAllCharacters) {
+                    <button class="tag" *ngFor="let character of data.items | slice:0:3" (click)="goToCharacter(character)">{{ character.name }}</button>
+                    <button class="tag" *ngIf="data.items.length > 3" (click)="toggleShowAll(data)">...</button>
+                } @else {
+                    <button class="tag" *ngFor="let character of data.items" (click)="goToCharacter(character)">{{ character.name }}</button>
+                }
+            </div>
+        }
+    }
+</div> -->

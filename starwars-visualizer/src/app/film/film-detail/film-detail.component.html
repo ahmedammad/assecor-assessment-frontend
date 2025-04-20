@@ -16,15 +16,10 @@
                 <p>{{film()?.opening_crawl}}</p>
             </div>
 
-            <div class="related-items">
-                <h3>Charaktere:</h3>
-                <div class="tag-list">
-                    <a href="#" class="tag">Luke Skywalker</a>
-                    <a href="#" class="tag">C3-PO</a>
-                    <a href="#" class="tag">R2D2</a>
-                    <a href="#" class="tag">...</a>
-                </div>
-            </div>
+            <app-related-items
+                title="Charaktere"
+                [dataView$]="charactersView$">
+            </app-related-items>
 
             <div class="related-items">
                 <h3>Planeten:</h3>

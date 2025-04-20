@@ -64,7 +64,7 @@ export class CharacterListComponent implements OnInit {
     });
   }
 
-  goToCharacter(character: Character): void {
+  goToDetail(character: Character): void {
     this.stateService.selectedCharacter.set(character);
     this.router.navigate(['detail'], { relativeTo: this.route });
   }

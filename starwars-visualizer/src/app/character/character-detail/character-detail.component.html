@@ -13,17 +13,17 @@
             <p><strong>Augenfarbe:</strong> {{character()?.eye_color}}</p>
             <p><strong>Geburtsjahr:</strong> {{character()?.birth_year}}</p>
             <p><strong>Geschlecht:</strong> {{character()?.gender}}</p>
-            <p><strong>Heimatplanet:</strong> <a href="#" class="tag">{{character()?.homeworld}}</a></p>
+            <p><strong>Heimatplanet: </strong>
+                @if(homeworldView$ | async; as data) {
+                    <app-feedback [data]="data"></app-feedback>
+                    <button class="tag" *ngIf="!data.isLoading && !data.error && data.items.length" (click)="goToPlanet(data.items[0])">{{ data.items[0].name }}</button>
+                }
+            </p>
 
-            <div class="related-items">
-                <h3>Filme:</h3>
-                <div class="tag-list">
-                    <a href="#" class="tag">Luke Skywalker</a>
-                    <a href="#" class="tag">C3-PO</a>
-                    <a href="#" class="tag">R2D2</a>
-                    <a href="#" class="tag">...</a>
-                </div>
-            </div>
+            <app-related-items
+                title="Filme"
+                [dataView$]="filmsView$">
+            </app-related-items>
 
             <div class="related-items">
                 <h3>Raumschiffe:</h3>
