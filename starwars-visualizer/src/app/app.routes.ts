@@ -5,6 +5,7 @@ import { CharacterListComponent } from './character/character-list/character-lis
 import { PlanetListComponent } from './planet/planet-list/planet-list.component';
 import { FilmDetailComponent } from './film/film-detail/film-detail.component';
 import { CharacterDetailComponent } from './character/character-detail/character-detail.component';
+import { PlanetDetailComponent } from './planet/planet-detail/planet-detail.component';
 
 export const routes: Routes = [
    { path: '', component: HomeComponent },
@@ -22,5 +23,11 @@ export const routes: Routes = [
          { path: 'detail', component: CharacterDetailComponent }
       ]
    },
-   { path: 'planets', component: PlanetListComponent },
+   {
+      path: 'planets',
+      children: [
+         { path: '', component: PlanetListComponent },
+         { path: 'detail', component: PlanetDetailComponent }
+      ]
+   },
 ];

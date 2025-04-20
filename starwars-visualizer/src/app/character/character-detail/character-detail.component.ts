@@ -5,7 +5,7 @@ import { ImageSliderComponent } from "../../image-slider/image-slider.component"
 @Component({
   selector: 'app-character-detail',
   standalone: true,
-  imports: [ImageSliderComponent, ImageSliderComponent],
+  imports: [ImageSliderComponent],
   templateUrl: './character-detail.component.html',
   styleUrl: './character-detail.component.scss'
 })

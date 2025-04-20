@@ -10,24 +10,30 @@ import { Planet } from '../../types/planet';
 })
 export class ItemService {
 
-  private apiUrl = 'https://swapi.info/api';
+  private baseUrl = 'https://swapi.info/api';
 
   constructor(private http: HttpClient) {}
 
   getFilms(): Observable<Film[]> {
-    return this.http.get<Film[]>(`${this.apiUrl}/films`).pipe(
+    return this.http.get<Film[]>(`${this.baseUrl}/films`).pipe(
       catchError(this.handleError)
     );
   }
 
   getCharacters(): Observable<Character[]> {
-    return this.http.get<Character[]>(`${this.apiUrl}/people`).pipe(
+    return this.http.get<Character[]>(`${this.baseUrl}/people`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getCharacterByUrl(apiUrl: string): Observable<Character> {
+    return this.http.get<Character>(apiUrl).pipe(
       catchError(this.handleError)
     );
   }
 
   getPlanets(): Observable<Planet[]> {
-    return this.http.get<Planet[]>(`${this.apiUrl}/planets`).pipe(
+    return this.http.get<Planet[]>(`${this.baseUrl}/planets`).pipe(
       catchError(this.handleError)
     );
   }

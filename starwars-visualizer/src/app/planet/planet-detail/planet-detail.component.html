@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="page-title">
+        <p>Planentendetails</p>
+        <h1>{{planet()?.name}}</h1>
+    </div>
+
+    <div class="item-details">
+        <div class="item-info">
+            <h2>Details:</h2>
+            <p><strong>Rotationsperiode:</strong> {{planet()?.rotation_period}}</p>
+            <p><strong>Umlaufperiode:</strong> {{planet()?.orbital_period}}</p>
+            <p><strong>Durchmesser:</strong> {{planet()?.diameter }}</p>
+            <p><strong>Klima:</strong> {{planet()?.climate}}</p>
+            <p><strong>Schwerkraft:</strong> {{planet()?.gravity}}</p>
+            <p><strong>Gelände:</strong> {{planet()?.terrain}}</p>
+            <p><strong>Oberflächenwasser:</strong> {{planet()?.surface_water}}</p>
+            <p><strong>Bevölkerung:</strong> {{planet()?.population}}</p>
+
+            <div class="related-items">
+                <h3>Filme:</h3>
+                <div class="tag-list">
+                    <a href="#" class="tag">Luke Skywalker</a>
+                    <a href="#" class="tag">C3-PO</a>
+                    <a href="#" class="tag">R2D2</a>
+                    <a href="#" class="tag">...</a>
+                </div>
+            </div>
+
+            <div class="related-items">
+                <h3>Einwohner:</h3>
+                <div class="tag-list">
+                    <a href="#" class="tag">Arid</a>
+                    <a href="#" class="tag">Tatooine</a>
+                    <a href="#" class="tag">...</a>
+                </div>
+            </div>
+
+        </div>
+
+        <app-image-slider [images]="['images/planet1.jpg', 'images/planet2.jpg']"></app-image-slider>
+
+    </div>
+</div>

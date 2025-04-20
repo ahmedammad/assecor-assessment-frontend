@@ -4,6 +4,8 @@ import { BehaviorSubject, catchError, delay, map, Observable, startWith, switchM
 import { ItemService } from '../../services/rest/item.service';
 import { FeedbackComponent } from '../../feedback/feedback.component';
 import { Planet } from '../../types/planet';
+import { StateService } from '../../services/state.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 interface DataView {
@@ -25,7 +27,7 @@ export class PlanetListComponent implements OnInit {
   dataView$!: Observable<DataView>;
   private refreshSubject = new BehaviorSubject<void>(undefined);
 
-  constructor(private itemService: ItemService) { }
+  constructor(private itemService: ItemService, private stateService: StateService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.dataView$ = this.refreshSubject.asObservable().pipe(
@@ -62,4 +64,9 @@ export class PlanetListComponent implements OnInit {
     });
   }
 
+  goToDetail(planet: Planet): void {
+
+    this.stateService.selectedPlanet.set(planet);
+    this.router.navigate(['detail'], { relativeTo: this.route });
+  }
 }

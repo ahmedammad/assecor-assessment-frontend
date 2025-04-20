@@ -18,7 +18,7 @@
                 <p>Durchmesser: {{ item.diameter }}</p>
                 <p>Klima: {{ item.climate }}</p>
                 <p>Bevölkerung: {{ item.population }}</p>
-                <a href="#" class="more-info">Mehr Informationen...</a>
+                <span class="more-info" (click)="goToDetail(item)">Mehr Informationen...</span>
             </div>
         </div>
         }
