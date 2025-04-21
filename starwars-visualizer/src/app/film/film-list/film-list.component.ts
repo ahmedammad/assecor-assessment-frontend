@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, catchError, delay, map, Observable, startWith, switchMap } from 'rxjs';
+import { BehaviorSubject, catchError, delay, map, Observable, of, startWith, switchMap } from 'rxjs';
 import { ItemService } from '../../services/rest/item.service';
 import { Film } from '../../types/film';
 import { FeedbackComponent } from '../../feedback/feedback.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StateService } from '../../services/state.service';
-
 
 interface DataView {
   title: string;
@@ -41,27 +40,22 @@ export class FilmListComponent implements OnInit {
   }
 
   private fetchFilms(): Observable<DataView> {
-    return this.itemService.getFilms().pipe(
-      map(films => ({
-        title: 'Filme',
-        items: films,
-        isLoading: false,
-        error: null
-      })),
-      delay(2000), // just to see the spinner , dont need it
-      catchError(error => this.createErrorViewModel(error.message))
-    );
-  }
+    if (this.stateService.films()) {
+      return of({
+        title: 'Filme', items: this.stateService.films() ?? [], isLoading: false, error: null
+      })
+    }
 
-  private createErrorViewModel(errorMessage: string): Observable<DataView> {
-    return new Observable(subscriber => {
-      subscriber.next({
-        title: 'Filme',
-        items: [] as Film[],
-        isLoading: false,
-        error: errorMessage
-      });
-    });
+    return this.itemService.getFilms().pipe(
+      map(films => {
+        this.stateService.films.set(films);
+        return {
+          title: 'Filme', items: films, isLoading: false, error: null
+        };
+      }),
+      delay(2000), // just to see the spinner , dont need it
+      catchError((error) => of({ title: 'Filme', items: [], isLoading: false, error: error.message }))
+    );
   }
 
   goToDetail(film: Film): void {

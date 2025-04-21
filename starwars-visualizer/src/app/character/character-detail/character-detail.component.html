@@ -16,7 +16,9 @@
             <p><strong>Heimatplanet: </strong>
                 @if(homeworldView$ | async; as data) {
                     <app-feedback [data]="data"></app-feedback>
-                    <button class="tag" *ngIf="!data.isLoading && !data.error && data.items.length" (click)="goToPlanet(data.items[0])">{{ data.items[0].name }}</button>
+                    @if(!data.isLoading && !data.error && data.items.length) {
+                        <button class="tag" (click)="goToPlanet(data.items[0])">{{ data.items[0].name }}</button>
+                    }
                 }
             </p>
 

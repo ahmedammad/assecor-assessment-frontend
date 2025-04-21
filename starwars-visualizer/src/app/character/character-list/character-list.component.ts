@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, catchError, delay, map, Observable, startWith, switchMap } from 'rxjs';
+import { BehaviorSubject, catchError, delay, map, Observable, of, startWith, switchMap } from 'rxjs';
 import { ItemService } from '../../services/rest/item.service';
 import { Character } from '../../types/character';
 import { FeedbackComponent } from "../../feedback/feedback.component";
 import { StateService } from '../../services/state.service';
 import { ActivatedRoute, Router } from '@angular/router';
-
 
 interface DataView {
   title: string;
@@ -41,27 +40,21 @@ export class CharacterListComponent implements OnInit {
   }
 
   private fetchCharacters(): Observable<DataView> {
+    if (this.stateService.characters()) {
+      return of({
+        title: 'Charaktere', items: this.stateService.characters() ?? [], isLoading: false, error: null
+      })
+    }
     return this.itemService.getCharacters().pipe(
-      map(characters => ({
-        title: 'Charaktere',
-        items: characters,
-        isLoading: false,
-        error: null
-      })),
-      delay(2000), // just to see the spinner , dont need it
-      catchError(error => this.createErrorViewModel(error.message))
+      map(characters => {
+        this.stateService.characters.set(characters);
+        return {
+          title: 'Charaktere', items: characters, isLoading: false, error: null
+        };
+      }),
+      delay(2000),
+      catchError((error) => of({ title: 'Charaktere', items: [], isLoading: false, error: error.message }))
     );
-  }
-
-  private createErrorViewModel(errorMessage: string): Observable<DataView> {
-    return new Observable(subscriber => {
-      subscriber.next({
-        title: 'Charaktere',
-        items: [] as Character[],
-        isLoading: false,
-        error: errorMessage
-      });
-    });
   }
 
   goToDetail(character: Character): void {

@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { StateService } from '../../services/state.service';
 import { ImageSliderComponent } from "../../image-slider/image-slider.component";
 import { Planet } from '../../types/planet';
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { FeedbackComponent } from '../../feedback/feedback.component';
 import { CommonModule } from '@angular/common';
 import { RelatedItemsComponent } from '../../related-items/related-items.component';
-import { FilmService, FilmsView } from '../../services/film/film.service';
-import { PlanetService, PlanetsView } from '../../services/planet/planet.service';
+import { ItemService } from '../../services/rest/item.service';
+import { DataViewService } from '../../services/data-view.service';
+import { Film } from '../../types/film';
 
 @Component({
   selector: 'app-character-detail',
@@ -19,14 +19,26 @@ import { PlanetService, PlanetsView } from '../../services/planet/planet.service
 })
 export class CharacterDetailComponent {
 
-  constructor(private planetService: PlanetService, private stateService: StateService, private router: Router,
-    private filmService: FilmService
+  constructor(private stateService: StateService, private router: Router,
+    private dataViewService: DataViewService, private itemService: ItemService
   ) { }
   character = this.stateService.selectedCharacter;
 
-  homeworldView$: Observable<PlanetsView> = this.planetService.getPlanetsView$(this.getPlanetsUrls());
+  homeworldView$ = this.dataViewService.getDataView<Planet>(
+    this.getPlanetsUrls(),
+    this.stateService.planets,
+    items => this.stateService.updateItems(this.stateService.planets, items),
+    url => this.itemService.getPlanetByUrl(url),
+    'planets'
+  );
 
-  filmsView$: Observable<FilmsView> = this.filmService.getFilmsView$(this.character()?.films ?? []);
+  filmsView$ = this.dataViewService.getDataView<Film>(
+    this.character()?.films ?? [],
+    this.stateService.films,
+    items => this.stateService.updateItems(this.stateService.films, items),
+    url => this.itemService.getFilmByUrl(url),
+    'films'
+  );
 
   getPlanetsUrls(): string[] {
     const homeworld = this.character()?.homeworld;

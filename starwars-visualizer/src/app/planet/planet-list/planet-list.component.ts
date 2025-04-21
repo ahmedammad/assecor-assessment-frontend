@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, catchError, delay, map, Observable, startWith, switchMap } from 'rxjs';
+import { BehaviorSubject, catchError, delay, map, Observable, of, startWith, switchMap } from 'rxjs';
 import { ItemService } from '../../services/rest/item.service';
 import { FeedbackComponent } from '../../feedback/feedback.component';
 import { Planet } from '../../types/planet';
 import { StateService } from '../../services/state.service';
 import { ActivatedRoute, Router } from '@angular/router';
-
 
 interface DataView {
   title: string;
@@ -41,27 +40,21 @@ export class PlanetListComponent implements OnInit {
   }
 
   private fetchPlanets(): Observable<DataView> {
+    if (this.stateService.planets()) {
+      return of({
+        title: 'Planeten', items: this.stateService.planets() ?? [], isLoading: false, error: null
+      })
+    }
     return this.itemService.getPlanets().pipe(
-      map(planets => ({
-        title: 'Planeten',
-        items: planets,
-        isLoading: false,
-        error: null
-      })),
-      delay(2000), // just to see the spinner , dont need it
-      catchError(error => this.createErrorViewModel(error.message))
+      map(planets => {
+        this.stateService.planets.set(planets);
+        return {
+          title: 'Planeten', items: planets, isLoading: false, error: null
+        };
+      }),
+      delay(2000),
+      catchError((error) => of({ title: 'Planeten', items: [], isLoading: false, error: error.message }))
     );
-  }
-
-  private createErrorViewModel(errorMessage: string): Observable<DataView> {
-    return new Observable(subscriber => {
-      subscriber.next({
-        title: 'Planeten',
-        items: [] as Planet[],
-        isLoading: false,
-        error: errorMessage
-      });
-    });
   }
 
   goToDetail(planet: Planet): void {

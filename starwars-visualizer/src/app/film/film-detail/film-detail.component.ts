@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StateService } from '../../services/state.service';
 import { ImageSliderComponent } from '../../image-slider/image-slider.component';
-import { Observable } from 'rxjs';
 import { RelatedItemsComponent } from '../../related-items/related-items.component';
-import { CharacterService, CharactersView } from '../../services/character/character.service';
-import { PlanetService, PlanetsView } from '../../services/planet/planet.service';
+import { DataViewService } from '../../services/data-view.service';
+import { Character } from '../../types/character';
+import { ItemService } from '../../services/rest/item.service';
+import { Planet } from '../../types/planet';
 
 @Component({
   selector: 'app-film-detail',
@@ -17,12 +18,24 @@ import { PlanetService, PlanetsView } from '../../services/planet/planet.service
 
 export class FilmDetailComponent {
 
-  constructor(private planetService: PlanetService, private stateService: StateService, private characterService: CharacterService) { }
+  constructor(private stateService: StateService, private dataViewService: DataViewService, private itemService: ItemService) { }
 
   film = this.stateService.selectedFilm;
 
-  charactersView$: Observable<CharactersView> = this.characterService.getCharactersView$(this.film()?.characters ?? []);
+  charactersView$ = this.dataViewService.getDataView<Character>(
+    this.film()?.characters ?? [],
+    this.stateService.characters,
+    items => this.stateService.updateItems(this.stateService.characters, items),
+    url => this.itemService.getCharacterByUrl(url),
+    'characters'
+  );
 
-  planetsView$: Observable<PlanetsView> = this.planetService.getPlanetsView$(this.film()?.planets ?? []);
+  planetsView$ = this.dataViewService.getDataView<Planet>(
+    this.film()?.planets ?? [],
+    this.stateService.planets,
+    items => this.stateService.updateItems(this.stateService.planets, items),
+    url => this.itemService.getPlanetByUrl(url),
+    'planets'
+  );
 
 }

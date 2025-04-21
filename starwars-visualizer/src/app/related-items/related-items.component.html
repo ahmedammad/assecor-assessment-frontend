@@ -10,7 +10,9 @@
                   {{ isFilm(item) ? item.title : isCharacter(item) || isPlanet(item) ? item.name : '' }}
                 </button>
               }
-            <button class="tag" *ngIf="data.items.length > 3" (click)="toggleShowAll(data)">...</button>
+            @if (data.items.length > 3) {
+              <button class="tag" (click)="toggleShowAll(data)">...</button>
+            }
           } @else {
             @for (item of data.items; track item) {
                 <button class="tag" (click)="onItemClick(item)">
@@ -21,4 +23,4 @@
         </div>
       }
     }
-  </div>
+</div>
