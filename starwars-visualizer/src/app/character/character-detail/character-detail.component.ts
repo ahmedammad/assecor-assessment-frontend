@@ -1,27 +1,14 @@
-import { Component, computed } from '@angular/core';
+import { Component } from '@angular/core';
 import { StateService } from '../../services/state.service';
 import { ImageSliderComponent } from "../../image-slider/image-slider.component";
-import { Film } from '../../types/film';
 import { Planet } from '../../types/planet';
-import { catchError, delay, forkJoin, map, Observable, of, startWith } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { ItemService } from '../../services/rest/item.service';
 import { FeedbackComponent } from '../../feedback/feedback.component';
 import { CommonModule } from '@angular/common';
 import { RelatedItemsComponent } from '../../related-items/related-items.component';
-
-interface HomeworldView {
-  items: Planet[];
-  isLoading: boolean;
-  error: string | null;
-}
-
-interface FilmsView {
-  items: Film[];
-  isLoading: boolean;
-  error: string | null;
-  showAll: boolean;
-}
+import { FilmService, FilmsView } from '../../services/film/film.service';
+import { PlanetService, PlanetsView } from '../../services/planet/planet.service';
 
 @Component({
   selector: 'app-character-detail',
@@ -32,47 +19,19 @@ interface FilmsView {
 })
 export class CharacterDetailComponent {
 
-  constructor(private itemService: ItemService, private stateService: StateService, private router: Router) { }
+  constructor(private planetService: PlanetService, private stateService: StateService, private router: Router,
+    private filmService: FilmService
+  ) { }
   character = this.stateService.selectedCharacter;
 
-  homeworldView$: Observable<HomeworldView> = computed(() => {
-    const character = this.character();
-    if (!character || !character.homeworld) {
-      return of({ items: [], isLoading: false, error: null });
-    }
+  homeworldView$: Observable<PlanetsView> = this.planetService.getPlanetsView$(this.getPlanetsUrls());
 
-    return this.itemService.getPlanetByUrl(character.homeworld).pipe(
-      map(planet => ({ items: [planet], isLoading: false, error: null })),
-      delay(2000),
-      startWith({ items: [], isLoading: true, error: null }),
-      catchError(() => of({ items: [], isLoading: false, error: 'Failed to load homeworld' }))
-    );
-  })();
+  filmsView$: Observable<FilmsView> = this.filmService.getFilmsView$(this.character()?.films ?? []);
 
-  filmsView$: Observable<FilmsView> = computed(() => {
-    const character = this.character();
-    if (!character || !character.films?.length) {
-      return of({ items: [], isLoading: false, error: null, showAll: false });
-    }
-
-    const filmObservables = character.films.map(url =>
-      this.itemService.getFilmByUrl(url).pipe(
-        catchError(() => of(null))
-      )
-    );
-
-    return forkJoin(filmObservables).pipe(
-      map(films => ({
-        items: films.filter((f): f is Film => f !== null),
-        isLoading: false,
-        error: films.every(f => f === null) ? 'Failed to load films' : null,
-        showAll: false
-      })),
-      delay(2000),
-      startWith({ items: [], isLoading: true, error: null, showAll: false }),
-      catchError(() => of({ items: [], isLoading: false, error: 'Failed to load films', showAll: false }))
-    );
-  })();
+  getPlanetsUrls(): string[] {
+    const homeworld = this.character()?.homeworld;
+    return homeworld ? [homeworld] : [];
+  }
 
   goToPlanet(planet: Planet): void {
     this.stateService.selectedPlanet.set(planet);

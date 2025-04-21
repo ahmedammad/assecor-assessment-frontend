@@ -16,24 +16,15 @@
             <p><strong>Oberflächenwasser:</strong> {{planet()?.surface_water}}</p>
             <p><strong>Bevölkerung:</strong> {{planet()?.population}}</p>
 
-            <div class="related-items">
-                <h3>Filme:</h3>
-                <div class="tag-list">
-                    <a href="#" class="tag">Luke Skywalker</a>
-                    <a href="#" class="tag">C3-PO</a>
-                    <a href="#" class="tag">R2D2</a>
-                    <a href="#" class="tag">...</a>
-                </div>
-            </div>
+            <app-related-items
+                title="Einwohner"
+                [dataView$]="residentsView$">
+            </app-related-items>
 
-            <div class="related-items">
-                <h3>Einwohner:</h3>
-                <div class="tag-list">
-                    <a href="#" class="tag">Arid</a>
-                    <a href="#" class="tag">Tatooine</a>
-                    <a href="#" class="tag">...</a>
-                </div>
-            </div>
+            <app-related-items
+                title="Filme"
+                [dataView$]="filmsView$">
+            </app-related-items>
 
         </div>
 
