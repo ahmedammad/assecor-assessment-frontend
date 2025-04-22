@@ -49,6 +49,7 @@ export class CharacterListComponent implements OnInit {
     return this.itemService.getCharacters().pipe(
       map(characters => {
         this.stateService.characters.set(characters);
+        this.stateService.charactersLoaded.set(true);
         return {
           title: 'Charaktere', items: characters, isLoading: false, error: null
         };

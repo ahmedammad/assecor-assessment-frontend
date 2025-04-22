@@ -50,6 +50,7 @@ export class FilmListComponent implements OnInit {
     return this.itemService.getFilms().pipe(
       map(films => {
         this.stateService.films.set(films);
+        this.stateService.filmsLoaded.set(true);
         return {
           title: 'Filme', items: films, isLoading: false, error: null
         };

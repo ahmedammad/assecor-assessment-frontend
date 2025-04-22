@@ -49,6 +49,7 @@ export class PlanetListComponent implements OnInit {
     return this.itemService.getPlanets().pipe(
       map(planets => {
         this.stateService.planets.set(planets);
+        this.stateService.planetsLoaded.set(true);
         return {
           title: 'Planeten', items: planets, isLoading: false, error: null
         };
