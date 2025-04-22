@@ -41,7 +41,7 @@ export class CharacterListComponent implements OnInit {
   }
 
   private fetchCharacters(): Observable<DataView> {
-    if (this.stateService.characters()) {
+    if (this.stateService.charactersLoaded()) {
       return of({
         title: 'Charaktere', items: this.stateService.characters() ?? [], isLoading: false, error: null
       })

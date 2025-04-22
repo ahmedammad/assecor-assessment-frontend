@@ -41,7 +41,7 @@ export class FilmListComponent implements OnInit {
   }
 
   private fetchFilms(): Observable<DataView> {
-    if (this.stateService.films()) {
+    if (this.stateService.filmsLoaded()) {
       return of({
         title: 'Filme', items: this.stateService.films() ?? [], isLoading: false, error: null
       })

@@ -1,21 +1,27 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Film } from '../../types/film';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { Character } from '../../types/character';
 import { Planet } from '../../types/planet';
+import { StateService } from '../state.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ItemService {
 
-  private baseUrl = 'https://swapi.info/api';
+  http = inject(HttpClient);
+  stateService = inject(StateService);
 
-  constructor(private http: HttpClient) {}
+  private baseUrl = 'https://swapi.info/api';
 
   getFilms(): Observable<Film[]> {
     return this.http.get<Film[]>(`${this.baseUrl}/films`).pipe(
+      map(films => {
+        this.stateService.filmsLoaded.set(true);
+        return films;
+      }),
       catchError(this.handleError)
     );
   }
@@ -28,6 +34,10 @@ export class ItemService {
 
   getCharacters(): Observable<Character[]> {
     return this.http.get<Character[]>(`${this.baseUrl}/people`).pipe(
+      map(characters => {
+        this.stateService.charactersLoaded.set(true);
+        return characters;
+      }),
       catchError(this.handleError)
     );
   }
@@ -40,6 +50,10 @@ export class ItemService {
 
   getPlanets(): Observable<Planet[]> {
     return this.http.get<Planet[]>(`${this.baseUrl}/planets`).pipe(
+      map(planets => {
+        this.stateService.planetsLoaded.set(true);
+        return planets;
+      }),
       catchError(this.handleError)
     );
   }

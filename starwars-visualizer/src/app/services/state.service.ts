@@ -10,12 +10,15 @@ export class StateService {
 
   selectedFilm = signal<Film | null>(null);
   films = signal<Film[] | null>(null);
+  filmsLoaded = signal(false);
 
   selectedCharacter = signal<Character | null>(null);
   characters = signal<Character[] | null>(null);
+  charactersLoaded = signal(false);
 
   selectedPlanet = signal<Planet | null>(null);
   planets = signal<Planet[] | null>(null);
+  planetsLoaded = signal(false);
 
   updateItems<T extends { url: string }>(signal: WritableSignal<T[] | null>, newItems: T[]): void {
     const currentItems = signal() || [];

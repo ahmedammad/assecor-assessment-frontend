@@ -41,7 +41,7 @@ export class PlanetListComponent implements OnInit {
   }
 
   private fetchPlanets(): Observable<DataView> {
-    if (this.stateService.planets()) {
+    if (this.stateService.planetsLoaded()) {
       return of({
         title: 'Planeten', items: this.stateService.planets() ?? [], isLoading: false, error: null
       })
