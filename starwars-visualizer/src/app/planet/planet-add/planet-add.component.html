@@ -1,0 +1,41 @@
+<div class="form-container">
+    <h2 class="form-title">Planet hinzufügen</h2>
+
+    <form>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Name eingeben">
+        </div>
+
+        <div class="form-group">
+            <label for="type">Type</label>
+            <select id="type">
+                <option>Desert planet</option>
+                <option>Sea planet</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="created-by">Created by</label>
+            <select id="created-by">
+                <option>George Lucas</option>
+                <option>Tom Cruise</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="genre">Genre</label>
+            <input type="text" id="genre" placeholder="Science fiction">
+        </div>
+
+        <div class="form-group">
+            <label for="races">Race(s)</label>
+            <textarea id="races" placeholder="Namen mit Semikolon trennen"></textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="button" class="btn btn-secondary" (click)="dialogRef.close()">Abbrechen</button>
+            <button type="button" class="btn btn-primary" (click)="dialogRef.close()">Planet hinzufügen</button>
+        </div>
+    </form>
+</div>

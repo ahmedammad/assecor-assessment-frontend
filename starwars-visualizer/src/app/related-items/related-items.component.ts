@@ -1,4 +1,4 @@
-import { Component, inject, input, output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Film } from '../types/film';
 import { Character } from '../types/character';
@@ -7,6 +7,10 @@ import { CommonModule } from '@angular/common';
 import { StateService } from '../services/state.service';
 import { Router } from '@angular/router';
 import { Planet } from '../types/planet';
+import { MatDialog } from '@angular/material/dialog';
+import { FilmAddComponent } from '../film/film-add/film-add.component';
+import { CharacterAddComponent } from '../character/character-add/character-add.component';
+import { PlanetAddComponent } from '../planet/planet-add/planet-add.component';
 
 interface DataView {
   items: (Film | Character | Planet)[];
@@ -24,8 +28,7 @@ interface DataView {
 })
 export class RelatedItemsComponent {
 
-  private stateService = inject(StateService);
-  private router = inject(Router);
+  constructor(private dialog: MatDialog, private stateService: StateService, private router: Router) {}
 
   title = input.required<string>();
   dataView$ = input.required<Observable<DataView>>();
@@ -59,6 +62,17 @@ export class RelatedItemsComponent {
   goToPlanet(planet: Planet): void {
     this.stateService.selectedPlanet.set(planet);
     this.router.navigate(['planets/detail']);
+  }
+
+  addItem(item: Film | Character | Planet): void {
+    let component;
+    if (this.isFilm(item)) component = FilmAddComponent;
+    if (this.isCharacter(item)) component = CharacterAddComponent;
+    if (this.isPlanet(item)) component = PlanetAddComponent;
+
+    if (component) this.dialog.open(component, {
+      backdropClass: 'app-backdrop',
+    });
   }
 
   isFilm(item: Film | Character | Planet): item is Film {

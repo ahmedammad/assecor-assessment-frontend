@@ -1,0 +1,56 @@
+<div class="form-container">
+    <h2 class="form-title">Charakter hinzufügen</h2>
+    <form>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Name eingeben">
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="height">Größe</label>
+                <input type="text" id="height" placeholder="Meter">
+            </div>
+
+            <div class="form-group">
+                <label for="weight">Gewicht</label>
+                <input type="text" id="weight" placeholder="Kg">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="hair-color">Haarfarbe</label>
+                <input type="text" id="hair-color" placeholder="Haarfarbe eingeben">
+            </div>
+
+            <div class="form-group">
+                <label for="eye-color">Augenfarbe</label>
+                <select id="eye-color">
+                    <option>Gelb</option>
+                    <option>Blau</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="birth-year">Geburtsjahr</label>
+                <input type="text" id="birth-year" placeholder="YYYY">
+            </div>
+
+            <div class="form-group">
+                <label for="gender">Geschlecht</label>
+                <select id="gender">
+                    <option>Male</option>
+                    <option>Female</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="button" class="btn btn-secondary" (click)="dialogRef.close()">Abbrechen</button>
+            <button type="button" class="btn btn-primary" (click)="dialogRef.close()">Charakter hinzufügen</button>
+        </div>
+    </form>
+</div>
