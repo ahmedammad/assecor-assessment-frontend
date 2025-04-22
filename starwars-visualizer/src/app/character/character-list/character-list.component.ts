@@ -30,9 +30,10 @@ export class CharacterListComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataView$ = this.refreshSubject.asObservable().pipe(
-      switchMap(() => this.fetchCharacters()),
-      startWith({ title: 'Charaktere', items: [] as Character[], isLoading: true, error: null })
-    );
+      switchMap(() =>
+        this.fetchCharacters().pipe(
+          startWith({ title: 'Charaktere', items: [] as Character[], isLoading: true, error: null })
+        )));
   }
 
   retry(): void {

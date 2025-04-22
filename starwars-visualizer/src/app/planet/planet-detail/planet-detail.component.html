@@ -18,12 +18,14 @@
 
             <app-related-items
                 title="Einwohner"
-                [dataView$]="residentsView$">
+                [dataView$]="residentsView$"
+                (retry)="loadResidentsView()">
             </app-related-items>
 
             <app-related-items
                 title="Filme"
-                [dataView$]="filmsView$">
+                [dataView$]="filmsView$"
+                (retry)="loadFilmsView()">
             </app-related-items>
 
         </div>

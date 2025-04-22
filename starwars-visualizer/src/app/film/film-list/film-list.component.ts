@@ -30,9 +30,10 @@ export class FilmListComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataView$ = this.refreshSubject.asObservable().pipe(
-      switchMap(() => this.fetchFilms()),
-      startWith({ title: 'Filme', items: [] as Film[], isLoading: true, error: null })
-    );
+      switchMap(() =>
+        this.fetchFilms().pipe(
+          startWith({ title: 'Filme', items: [], isLoading: true, error: null })
+        )));
   }
 
   retry(): void {

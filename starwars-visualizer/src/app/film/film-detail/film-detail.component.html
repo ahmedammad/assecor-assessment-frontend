@@ -18,12 +18,14 @@
 
             <app-related-items
                 title="Charaktere"
-                [dataView$]="charactersView$">
+                [dataView$]="charactersView$"
+                (retry)="loadCharactersView()">
             </app-related-items>
 
             <app-related-items
                 title="Planeten"
-                [dataView$]="planetsView$">
+                [dataView$]="planetsView$"
+                (retry)="loadPlanetsView()">
             </app-related-items>
 
             <div class="related-items">

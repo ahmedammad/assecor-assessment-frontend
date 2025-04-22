@@ -15,7 +15,7 @@
             <p><strong>Geschlecht:</strong> {{character()?.gender}}</p>
             <p><strong>Heimatplanet: </strong>
                 @if(homeworldView$ | async; as data) {
-                    <app-feedback [data]="data"></app-feedback>
+                    <app-feedback [data]="data" (retry)="loadHomeworldView()"></app-feedback>
                     @if(!data.isLoading && !data.error && data.items.length) {
                         <button class="tag" (click)="goToPlanet(data.items[0])">{{ data.items[0].name }}</button>
                     }
@@ -24,7 +24,8 @@
 
             <app-related-items
                 title="Filme"
-                [dataView$]="filmsView$">
+                [dataView$]="filmsView$"
+                (retry)="loadFilmsView()">
             </app-related-items>
 
             <div class="related-items">

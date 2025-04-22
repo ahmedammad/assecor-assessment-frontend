@@ -1,7 +1,7 @@
 <div class="related-items">
     <h3>{{ title() }}:</h3>
     @if (dataView$() | async; as data) {
-      <app-feedback [data]="data"></app-feedback>
+      <app-feedback [data]="data" (retry)="retry.emit()"></app-feedback>
       @if (!data.isLoading && !data.error && data.items.length) {
         <div class="tag-list">
           @if (!data.showAll) {

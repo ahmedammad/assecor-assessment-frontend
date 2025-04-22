@@ -1,4 +1,4 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Film } from '../types/film';
 import { Character } from '../types/character';
@@ -29,6 +29,8 @@ export class RelatedItemsComponent {
 
   title = input.required<string>();
   dataView$ = input.required<Observable<DataView>>();
+
+  readonly retry = output<void>();
 
   toggleShowAll(dataView: DataView): void {
     dataView.showAll = true;

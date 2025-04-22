@@ -30,9 +30,10 @@ export class PlanetListComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataView$ = this.refreshSubject.asObservable().pipe(
-      switchMap(() => this.fetchPlanets()),
-      startWith({ title: 'Planeten', items: [] as Planet[], isLoading: true, error: null })
-    );
+      switchMap(() =>
+        this.fetchPlanets().pipe(
+          startWith({ title: 'Planeten', items: [] as Planet[], isLoading: true, error: null })
+        )));
   }
 
   retry(): void {

@@ -2,6 +2,13 @@ import { Injectable } from '@angular/core';
 import { Observable, of, forkJoin } from 'rxjs';
 import { catchError, delay, map, startWith } from 'rxjs/operators';
 
+export interface DataView<T> {
+  items: T[];
+  isLoading: boolean;
+  error: string | null;
+  showAll: boolean;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +21,7 @@ export class DataViewService {
     updateFn: (items: T[]) => void,
     fetchFn: (url: string) => Observable<T>,
     entityName: string
-  ): Observable<{ items: T[]; isLoading: boolean; error: string | null; showAll: boolean }> {
+  ): Observable<DataView<T>> {
     if (!urls?.length) {
       return of({ items: [], isLoading: false, error: null, showAll: false });
     }
