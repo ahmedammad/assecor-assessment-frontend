@@ -420,10 +420,8 @@ main {
 
 .form-container {
   background: #fff;
-  max-width: 500px;
   width: 100%;
   padding: 30px;
-  // border-radius: 4px;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
 
   @media (max-width: $mobile) {
@@ -543,7 +541,7 @@ main {
 }
 
 .app-backdrop {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(179 179 179 / 30%);
   backdrop-filter: blur(5px);
 }
 

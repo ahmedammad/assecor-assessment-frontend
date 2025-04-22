@@ -72,6 +72,7 @@ export class RelatedItemsComponent {
 
     if (component) this.dialog.open(component, {
       backdropClass: 'app-backdrop',
+      width: '50vw'
     });
   }
 
