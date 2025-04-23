@@ -1,43 +1,39 @@
-# Frontend test (DE)
- 
-## Zielsetzung
-Zur Wahl stehen folgende APIs:
-- https://swapi.dev/
-- http://ergast.com/mrd/
+# Informationen (DE)
 
-Ziel ist es, eine Webanwendung zu erstellen, welche die Daten der Schnittstellen visualisiert. Im Fall der SWAPI könnte man mit einer Liste der Filme beginnen, und sich über auftretende Charaktere weiter vertiefen. Es ist nicht erforderlich, alle Ressourcen der Schnittstelle zu verwerten, aber es sollte zumindest zu einer Master-Detail Beziehung kommen, mit welcher von einer Ressource, auf die Detailansicht einer anderen referenziert wird.
-Bitte richte dich bei der Umsetzung nach den Mockups unter folgendem Link:
-https://xd.adobe.com/view/b3c98134-11a8-44c2-5dd2-477b8550307f-c5f8/screen/c8fb4386-9d0d-4913-87e0-703d19d75589/Charaktere .
-Bei den Eingabemasken für neue Elemente geht es nur um die UI Umsetzung, da die Schnittstelle keine derartige Funktionalität anbietet.
+## Verwendete API
+- https://swapi.info/
 
-## Akzeptanzkriterien
-- Die Webanwendung zeigt Ressourcen der gewählten API an
-- Es werden mindestens 3 Root-Ressourcen angesprochen und visualisiert
-- Es wurde ein Anwendungs-Framework verwendet (Angular 2+, Blazor, Vue)
-- Die Anwendung ist responsive und skaliert auf Bildschirmgrößen entsprechend
-- Die Anwendung liegt unter Source-control (Git, TFS, DevOps)
+## Ausführung
+Klonen Sie das Repository, öffnen Sie ein Terminal und wechseln Sie mit cd in das Verzeichnis *starwars-visualizer*:
+- Geben Sie **npm install** in das Terminal ein und drücken Sie die Eingabetaste. Warten Sie, bis alle Abhängigkeiten installiert sind.
+- Geben Sie **npm run start** ein und drücken Sie die Eingabetaste. Warten Sie, bis das Projekt erstellt ist,
+- Öffnen Sie die App im Browser. Höchstwahrscheinlich auf **localhost:4200** oder über den im Terminal angezeigten Link.
 
-## Abgabeform
-- Link zu einem Repository welches die Anwendung und ein README beinhaltet (Github, Gitlab, Devops)
+## Navigation
+Navigieren Sie in der App über die Links in der Kopfzeile (Filme, Charaktere, Planeten) und sehen Sie sich die Live-Daten der API an:
+- Klicken Sie auf **Mehr Informationen...** eines beliebigen Elements, um dessen Details anzuzeigen.
+- In der Detailansicht können Sie auch nach unten navigieren, indem Sie Filme, Charaktere, Planeten oder Einwohner auswählen.
+- Klicken Sie auf einen Punkt unter dem Bild, um das nächste Bild anzuzeigen. (Beispielbilder, da sie nicht von der API bereitgestellt werden.)
+- Klicken Sie auf **...** (falls sichtbar), um die Liste der verbleibenden Einträge anzuzeigen. (Nur für Filme, Charaktere, Planeten, Einwohner.)
+- Klicken Sie auf **+**, um das Popup zum Hinzufügen von Einträgen zu öffnen. Klicken Sie auf eine beliebige Schaltfläche im Popup, um es zu schließen.
+- Klicken Sie in der Kopfzeile auf **Star Wars**, um zur Startseite zurückzukehren.
 
-# Frontend test (EN)
+# Information (EN)
 
-## main goal
-Choosing one of the following APIs:
-- https://swapi.dev/
-- http://ergast.com/mrd/
+## API used
+- https://swapi.info/
 
-your job is to create a simple web application, which visualizes the API data. In case of SWAPI, one way might be to start with a list of movies, and then navigate your way down via characters or other entities. You do not have to use all the resources the API is offering you, but there should be atleast one or two layers of master-detail relationship.
-Please follow the mockups under the following link:
-https://xd.adobe.com/view/b3c98134-11a8-44c2-5dd2-477b8550307f-c5f8/screen/c8fb4386-9d0d-4913-87e0-703d19d75589/Charaktere .
-The input masks for new elements are only about the UI implementation, since the interface does not offer such functionality.
+## How to run
+Clone the repository, open a terminal and cd in to the directory *starwars-visualizer*:
+- Type **npm install** in terminal and press enter. Wait for it to finish installing all the dependencies
+- Type **npm run start** and press enter. Wait for it to build the project.
+- Open the app in browser. Most probably on **localhost:4200** or the link shown in terminal.
 
-## acceptance criteria
-- the application runs and shows data of the selected API
-- there are atleast 3 consumed API root resources
-- you have used an application framework (Angular 2+, Blazor, Vue)
-- the application uses responsive design and scales properly woth changing screen sizes/resolutions
-- the code is under source control (Git, TFS, DevOps)
-
-## hand-in
-- Send us a link to your repository containing your code and a README
+## How to navigate
+Navigate the app using the links in header (Filme, Charaktere, Planeten) and see the live data fetched from api:
+- Click on **Mehr Informationen...** of any item to see its details.
+- In detail view you can also navigate down by selecting any Filme, Charaktere, Planeten, Einwohner.
+- Click on a dot under the image to see the next image. (images are sample, as api does not provide them)
+- Click on **...** (if it is visible) to see the list of remaining items.(only for Filme, Charaktere, Planeten, Einwohner.)
+- Click on **+** to open the popup of adding item. Click any button in the popup to close it.
+- Click on **Star Wars** in the header to go back to home page.
